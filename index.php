@@ -5,6 +5,12 @@
         <title></title>
     </head>
     <body>
+        <?php
+        if (isset($_SESSION['username'])) {
+                $username = $_SESSION['username'];
+                echo "Welcome, $username";
+        }
+        ?>
         <form action="authenticate.php" method="POST">
             Username: <input type="text" name="user"><br>
             Password: <input type="password" name="pwd"><br>

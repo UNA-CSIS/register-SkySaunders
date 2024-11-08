@@ -2,6 +2,7 @@
 // start session
 session_start();
 include 'validate.php';
+
 $uname = test_input($_POST['user']);
 $uPwd = test_input($_POST['pwd']);
 

@@ -1,9 +1,10 @@
 <?php
+
 // session start here...
 session_start();
 
 // get all 3 strings from the form (and scrub w/ validation function)
-include_once 'validate.php';
+include 'validate.php';
 $endUser = test_input($_POST['user']);
 $userPwd = test_input($_POST['pwd']);
 $pwdRepeat = test_input($_POST['repeat']);
@@ -30,18 +31,16 @@ $sql = $conn->prepare("SELECT * FROM users WHERE username = '$endUser'");
 $sql->execute();
 $sql->store_result();
 
-// make sure that the new user is not already in the database
 if ($sql->num_rows > 0) {
-    // User already exists, redirect back to register.php
     header("location: register.php");
     exit();
 } else {
     $sql = "INSERT INTO users (username, password) VALUES ('$endUser','$hashPwd')";
-    $result = $conn->query($sql);
 }
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
+    echo "<br> <a href='index.php'>Main Menu</a>";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
